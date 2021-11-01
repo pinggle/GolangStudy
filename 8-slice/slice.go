@@ -78,4 +78,38 @@ func main() {
 	fmt.Println("slice01 is empty : ", judgeSliceIsEmpty(slice01))
 	fmt.Println("slice04 is empty : ", judgeSliceIsEmpty(slice04))
 
+	/**
+	切片容量的追加:
+	1.切片的长度和容量不同,长度表示左指针至右指针之间的距离,容量表示左指针至底层数组末尾的距离;
+	2.切片扩容机制,append的时候,如果长度增加后超过容量,则容量增加2倍;
+	*/
+	var numbers = make([]int, 3, 5)
+	// len=3,cap=5,slice=[0 0 0]
+	fmt.Printf("len=%d,cap=%d,slice=%v\n", len(numbers), cap(numbers), numbers)
+	// 向numbers切片追加1个元素1,numbers len=4,cap=5;
+	numbers = append(numbers, 1)
+	// len=4,cap=5,slice=[0 0 0 1]
+	fmt.Printf("len=%d,cap=%d,slice=%v\n", len(numbers), cap(numbers), numbers)
+	// 向numbers切片追加1个元素2,numbers len=5,cap=5;
+	numbers = append(numbers, 2)
+	// len=5,cap=5,slice=[0 0 0 1 2]
+	fmt.Printf("len=%d,cap=%d,slice=%v\n", len(numbers), cap(numbers), numbers)
+	// 向numbers切片追加1个元素3,numbers len=5,cap=5;
+	numbers = append(numbers, 3)
+	// len=6,cap=10,slice=[0 0 0 1 2 3] -- 容量自动增加cap;
+	fmt.Printf("len=%d,cap=%d,slice=%v\n", len(numbers), cap(numbers), numbers)
+
+	/**
+	切片的截取;
+	*/
+	s01 := []int{1, 2, 3} //len=3,cap=3
+	s02 := s01[0:2]       // [1, 2]
+	fmt.Println(s02)
+	// copy 深拷贝;
+	s03 := make([]int, 3)
+	copy(s03, s01)
+	s01[0] = 100
+	fmt.Println(s01)
+	fmt.Println(s03)
+
 }
