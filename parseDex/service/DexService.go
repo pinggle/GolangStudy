@@ -31,6 +31,7 @@ func ParseDex(inputFile string) {
 	fileReader := bufio.NewReader(fileHandler)
 	dexFileInfo.DexHeader = ReadDexHeader(fileReader)
 	dexFileInfo.DexStringIds = ReadDexStringId(dexFileInfo.DexHeader.StringIdsSize, fileReader, fileHandler)
+	dexFileInfo.DexTypeIds = ReadDexTypeId(dexFileInfo.DexHeader.TypeIdsOff, dexFileInfo.DexHeader.TypeIdsSize, fileHandler, dexFileInfo.DexStringIds)
 	//fileHandler.Seek(10,0)
 	//fileHandler.Read(2)
 
